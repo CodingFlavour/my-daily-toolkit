@@ -1,0 +1,21 @@
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem auto;
+
+    h1 {
+        width: 230px;
+        max-width: fit-content;
+        transition: width 0.3s ease;
+        text-wrap: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__collapsed {
+        h1 {
+            width: 0px;
+        }
+    }
+}

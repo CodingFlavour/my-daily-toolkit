@@ -1,0 +1,19 @@
+{
+    "WEAPON_0": {
+        "name": "Arma de asta heroica de la Resistencia",
+        "type": "Spear",
+        "stats": {
+            "dexterity": 11,
+            "reach": "20,4"
+        }
+    },
+    "WEAPON_1": {
+        "name": "Estaca dentada de la reina Bellandir",
+        "type": "Spear",
+        "stats": {
+            "perception": 7,
+            "constitution": 8,
+            "cd_reduction": "8"
+        }
+    }
+}

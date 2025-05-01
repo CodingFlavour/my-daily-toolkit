@@ -1,7 +1,9 @@
-import type { NextConfig } from "next";
+/** @type {import('next').NextConfig} */
+import codingFlavourStylesConfig from "@coding-flavour/common/next.config.js";
 
-const nextConfig: NextConfig = {
-  /* config options here */
+const nextConfig = {
+  ...codingFlavourStylesConfig,
+  transpilePackages: ["@coding-flavour/common", "@coding-flavour/icons"],
 };
 
 export default nextConfig;

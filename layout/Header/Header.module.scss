@@ -1,0 +1,33 @@
+@use "../../styles/constants";
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: constants.$navbarOpen;
+    border-right: 1px solid var(--color-brand);
+    transition: width 0.3s ease;
+    border-right: 1px solid var(--color-border-tetriary);
+
+    &__navbar {
+        flex-grow: 1;
+    }
+
+    &__icon {
+        align-self: flex-end;
+        padding: 1rem;
+
+        &__button {
+            border: 0;
+            cursor: pointer;
+            background-color: var(--color-border-tetriary);
+            border-radius: 100vh;
+            aspect-ratio: 1;
+        }
+    }
+}
+
+
+.colapsed {
+    width: constants.$navbarCollapsed;
+}

@@ -1,0 +1,60 @@
+@use "../../styles/constants";
+
+.dropdown {
+    display: flex;
+    flex-direction: column;
+
+    li {
+        text-wrap: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__button {
+        border-width: 1px;
+        width: constants.$navbarOpen;
+        height: 50px;
+        max-width: 500px;
+        max-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        transition: width 0.3s ease;
+        border: 0;
+        background-color: var(--color-border-tetriary);
+    }
+
+    &__content {
+        transition: height 0.3s ease;
+        overflow: hidden;
+        height: 120px;
+        max-height: fit-content;
+    }
+}
+
+.inactive {
+    height: 0px;
+}
+
+.collapsed {
+    span {
+        display: none;
+    }
+
+    &.dropdown {
+        align-items: center;
+
+    }
+
+    .dropdown {
+        &__button {
+            aspect-ratio: 1;
+            border-radius: 100rem;
+            width: 30px;
+            height: auto;
+        }
+    }
+
+}

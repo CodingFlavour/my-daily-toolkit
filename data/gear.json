@@ -1,0 +1,80 @@
+{
+    "HEAD_0": {
+        "name": "Máscara de lobo fantasmal",
+        "stats": {
+            "dexterity": 5,
+            "cooldown_reduction": "3,1",
+            "mana_regen": "47,2"
+        }
+    },
+    "HEAD_1": {
+        "name": "Máscara de cosechador de sombras",
+        "stats": {
+            "dexterity": 4,
+            "wisdom": 3,
+            "cooldown_reduction": "4"
+        }
+    },
+    "HEAD_2": {
+        "name": "Capucha heroica de la Resistencia",
+        "stats": {
+            "hit_chance": 122,
+            "crit_chance": 95
+        }
+    },
+    "CHEST_0": {
+        "name": "Túnica de esencia danzante",
+        "stats": {
+            "dexterity": 5,
+            "wisdom": 3,
+            "heavy_attack_chance": 78
+        }
+    },
+    "CHEST_1": {
+        "name": "Placas del general de campo",
+        "stats": {
+            "perception": 3,
+            "strength": 4,
+            "stun_chance": 82
+        }
+    },
+    "CHEST_2": {
+        "name": "Túnica heroica de la Resistencia",
+        "stats": {
+            "dexterity": 4,
+            "hit_chance": 132
+        }
+    },
+    "CHEST_3": {
+        "name": "Túnica de lobo fantasmal",
+        "stats": {
+            "strength": 3,
+            "weakness_chance": 77,
+            "magic_evasion": 170
+        }
+    },
+    "CAPE_0": {
+        "name": "Manto de tapiz antiguo",
+        "stats": {
+            "ranged_evasion": 170,
+            "magic_evasion": 120,
+            "weakness_resistance": 81
+        }
+    },
+    "GLOVES_0": {
+        "name": "Guantes de lobo fantasmal",
+        "stats": {
+            "dexterity": 4,
+            "attack_speed": "4,9",
+            "ranged_evasion": 144
+        }
+    },
+    "GLOVES_1": {
+        "name": "Empuñaduras de cosechador de sombras",
+        "stats": {
+            "reach": "6,2",
+            "dexterity": 5,
+            "crit_chance": 65
+        }
+    }
+}
