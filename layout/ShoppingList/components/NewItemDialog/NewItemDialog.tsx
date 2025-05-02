@@ -24,8 +24,8 @@ const NewItemDialog = ({
                     <ul className={dialog__list}>
                         {Array.from({ length: counter }, (_, index) => (
                             <li key={index} className={dialog__list__item}>
-                                <InputText id={`product-name-${index}`} type="text" text={"Nombre"} withClear required />
-                                <InputText id={`product-link-${index}`} type="text" text={"Enlace"} withClear required />
+                                <InputText id={`product-name-${index}`} type="text" value={"Nombre"} withClear required />
+                                <InputText id={`product-link-${index}`} type="text" value={"Enlace"} withClear required />
                             </li>
                         ))}
                     </ul>

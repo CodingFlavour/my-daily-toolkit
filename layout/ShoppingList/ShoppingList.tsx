@@ -1,10 +1,11 @@
 'use client';
 
-import { Button, CheckboxText, InputText, Title } from "@coding-flavour/common";
+import { Button, CheckboxText, IconButton, InputText, Title } from "@coding-flavour/common";
 import Link from "next/link";
 import NewItemDialog from "./components/NewItemDialog/NewItemDialog";
 import useShoppingList from "./hooks/useShoppingList";
 import styles from './ShoppingList.module.scss';
+import IconClose from "@coding-flavour/icons/icon-close.svg";
 
 const { shoppingList, wrapper } = styles;
 
@@ -15,6 +16,7 @@ const ShoppingList = () => {
         handleOnSubmit,
         handleCheckbox,
         handleInputChange,
+        handleDeleteItem,
         openAll,
         setNewValue
     } = useShoppingList();
@@ -36,6 +38,7 @@ const ShoppingList = () => {
                         <span>Enlace</span>
                         <span>¿Comprar?</span>
                         <span>Cantidad</span>
+                        <span>Eliminar</span>
                     </li>
                     {list.map((item, index) => (
                         <li key={index}>
@@ -53,6 +56,13 @@ const ShoppingList = () => {
                                     valueOnChange={(inputUser) => handleInputChange(inputUser, index)}
                                     setNewValue={() => setNewValue(item.quantity)}
                                     required
+                                />
+                            </div>
+                            <div>
+                                <IconButton
+                                    src={IconClose}
+                                    alt="Eliminar producto"
+                                    onClick={() => handleDeleteItem(index)}
                                 />
                             </div>
                         </li>

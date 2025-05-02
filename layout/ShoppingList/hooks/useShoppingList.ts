@@ -131,12 +131,36 @@ const useShoppingList = () => {
             .catch(() => console.log("There has been an error"))
     }
 
+    const handleDeleteItem = (index: number) => {
+        if (!list) {
+            console.error("Como llegaste aqui?");
+            return;
+        }
+
+        const abort = new AbortController();
+        const name = list[index].name;
+        fetch(`${url}/shopping-list/${name}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            signal: abort.signal,
+        })
+            .then(() => {
+                const updatedList = [...list];
+                const newList = updatedList.filter((_, i) => i !== index);
+                setList(newList);
+            })
+            .catch(() => console.log("There has been an error"))
+    }
+
     return {
         list,
         openDialog,
         handleOnSubmit,
         handleCheckbox,
         handleInputChange,
+        handleDeleteItem,
         openAll,
         setNewValue
     }
