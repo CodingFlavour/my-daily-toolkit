@@ -4,103 +4,123 @@
 
 Un dashboard personal que centraliza herramientas útiles para tus hobbies actuales (Minecraft, Throne and Liberty, recetas) y ofrece funcionalidades para gestionar proyectos, progreso y metas. Modular y adaptable, con potencial para expandirse según necesidades o incluso transformarse en un producto público.
 
-#### **1.1. Dashboard**
+### **Dashboard**
 
-#### **1.2. Juegos**
+El dashboard se compone de varias secciones, clasificadas por hobbies, cada una con funcionalidades específicas. La idea es que cada sección sea independiente pero que todas estén integradas en un mismo lugar, permitiendo al usuario navegar fácilmente entre ellas.
 
-##### **1.2.1. Throne And Liberty**
+#### **Juegos**
 
-##### **Objetivo General**
+##### **Throne And Liberty**
+
+###### **Objetivo General**
 
 Un panel principal dedicado a organizar y gestionar tus builds, progreso de equipo y actividades clave en _Throne and Liberty_. Su diseño funcional y modular permite un acceso rápido a la información más relevante y un control total sobre tus objetivos.
 
-##### **Funcionalidades del Dashboard**
+###### **Funcionalidades del Dashboard**
 
-#### **Gestión de Builds**
-
-- **Crear Nueva Build**:
+- **Gestión de Builds**
+  - **Crear Nueva Build**:
     - Un botón destacado que permita generar una nueva build.
     - Flujo guiado para asignar atributos, equipo deseado y habilidades.
     - Opción de clonar builds existentes para modificarlas rápidamente.
-- 
-- **Vista Rápida de Builds**:
+  - **Vista Rápida de Builds**:
     - Mostrar una lista con todas las builds creadas:
-        - Nombre, clase y detalles clave (atributo principal, progreso).
-        - Botones de acción rápida: Editar, Eliminar, Ver Detalles.
-        - Posibilidad de marcar una build como favorita para destacarla.
-
-- **Resumen de Estado de Builds**:
+    - Nombre, clase y detalles clave (atributo principal, progreso).
+    - Botones de acción rápida: Editar, Eliminar, Ver Detalles.
+    - Posibilidad de marcar una build como favorita para destacarla.
+  - **Resumen de Estado de Builds**:
     - Progreso visual (e.g., barra de porcentaje) indicando qué tan completa está cada build.
     - Identificación rápida de las builds activas o "objetivo".
 
-#### **Gestión de Objetos**
-
-- **Resumen de Objetos Faltantes**:
+- **Gestión de Objetos**
+  - **Resumen de Objetos Faltantes**:
     - Mostrar los objetos que faltan para las builds activas en formato visual (lista o tarjetas).
     - Incluir detalles como:
         - Nombre del objeto.
         - Dónde se consigue (mazmorra, crafteo, evento).
         - Sugerencias específicas para obtenerlo.
-
-- **Opciones de Filtro y Orden**:
+  - **Opciones de Filtro y Orden**:
     - Permitir filtrar objetos según:
         - Builds específicas.
         - Tipo de contenido requerido (PvE, PvP, Craft).
     - Ordenar por relevancia o cercanía al objetivo.
 
-#### **Roadmap Diario**
-
-- **Tareas Generadas Automáticamente**:
+- **Roadmap Diario**
+  - **Tareas Generadas Automáticamente**:
     - Según los objetos faltantes y builds activas, sugerir tareas diarias.
     - Ejemplo: "Mazmorra X para conseguir [Objeto]" o "Recolectar materiales Y".
-
-- **Personalización del Roadmap**:
+  - **Personalización del Roadmap**:
     - Añadir o eliminar tareas manualmente según tus necesidades.
     - Reordenar tareas para priorizar actividades.
-
-- **Seguimiento de Progreso**:
+  - **Seguimiento de Progreso**:
     - Barra o porcentaje que indique qué tanto del roadmap has completado en el día.
 
-#### **Actividades y Estadísticas**
-
-- **Eventos Relevantes**:
+- **Actividades y Estadísticas**
+  - **Eventos Relevantes**:
     - Información sobre eventos en vivo del juego que sean útiles para tus builds (e.g., "Día de materiales raros").
-
-- **Estadísticas Personales**:
+  - **Estadísticas Personales**:
     - Número total de builds creadas.
     - Tiempo invertido en el progreso.
     - Porcentaje de builds completadas.
 
-#### **Widgets Modulares (Opcional)**
-
-- **Personalización del Dashboard**:
+- **Widgets Modulares (Opcional)**
+  - **Personalización del Dashboard**:
     - Posibilidad de arrastrar y soltar widgets para adaptar el dashboard a tus preferencias.
-
-- **Widgets Disponibles**:
+  - **Widgets Disponibles**:
     - Mini-lista de objetos faltantes.
     - Roadmap diario reducido.
     - Resumen de builds activas.
 
 ---
 
-### **Casos de Uso**
+###### **Casos de Uso**
 
 1. **Gestión de Builds en Progreso**:
     - Ver rápidamente qué objetos faltan para completar tu build objetivo y dónde conseguirlos.
     - Crear una nueva build para planificar tu próximo objetivo.
 
-1. **Organización de Actividades Diarias**:
+2. **Organización de Actividades Diarias**:
     - Revisar las tareas diarias sugeridas en el roadmap y priorizar actividades clave.
 
-1. **Seguimiento de Progreso**:
+3. **Seguimiento de Progreso**:
     - Consultar estadísticas sobre tu avance en el juego y ajustar tu enfoque según tus metas.
 
-1. **Optimización del Tiempo**:
+4. **Optimización del Tiempo**:
     - Usar los widgets para obtener un resumen rápido sin entrar en detalles extensos.
 
 ---
 
-### **2. Objetivos del Producto**
+##### **Cocina**
+
+###### **Recetario**
+
+- Añadir, editar y guardar recetas personales.
+- Posibilidad de marcar recetas como favoritas.
+- Generar calendario de comidas semanal basado en recetas seleccionadas.
+- Generar listas de compra automáticas a partir del calendario.
+
+###### **Lista de la Compra Colaborativa**
+
+Una herramienta integrada que permite gestionar fácilmente la lista de la compra entre varias personas (por ejemplo, compañeros de piso), centralizando las necesidades y facilitando el proceso de compra.
+
+- **Funcionalidades Clave:**
+  - Añadir Productos Manualmente o desde Recetas:
+    - Campo para nombre del producto, cantidad y enlace opcional (e.g., Amazon, Carrefour, etc.).
+    - Posibilidad de importar ingredientes directamente desde recetas seleccionadas.
+  - Gestión Colaborativa en Tiempo Real:
+    - Acceso compartido mediante enlace único.
+    - Cada usuario puede añadir o quitar productos según lo necesite.
+    - Sistema de identificación opcional por nombre o color para ver quién ha añadido qué.
+  - Estado de los Productos:
+    - Checkbox para marcar si un producto ya ha sido comprado o si aún es necesario.
+    - Visualización clara de lo pendiente vs. lo ya adquirido.
+  - Botón "Añadir al Carrito":
+    - Automatización que reúne todos los productos marcados como “necesarios” y crea una lista con sus cantidades y enlaces para compra rápida.
+    - Preparado para integrarse con carritos de tiendas online en el futuro.
+  - Historial de Compras (Opcional):
+    - Registro de productos comprados previamente para sugerencias o auto-completado.
+
+### **Objetivos del Producto**
 
 #### **Primarios:**
 
@@ -301,17 +321,3 @@ Un panel principal dedicado a organizar y gestionar tus builds, progreso de equi
 3. **Semana 4-5:** Añadir el To-Do List funcional y organizar datos locales (SQLite).
 
 4. **Mes 2:** Iterar según necesidades, empezar a trabajar en el Recetario.
-
-  
-
----
-
-  
-
-### **10. Próximos Pasos**
-
-- Define **exactamente qué funcionalidades necesitas en el MVP.**
-
-- Diseña los wireframes o bocetos para las secciones principales.
-
-- Elige un stack inicial y empieza a configurar el entorno.
