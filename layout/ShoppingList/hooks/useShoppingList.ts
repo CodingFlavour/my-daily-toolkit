@@ -1,5 +1,5 @@
 import { buildDomain } from "@/helpers/domain";
-import { MouseEvent, useState } from "react";
+import { Dispatch, MouseEvent, SetStateAction, useState } from "react";
 
 interface Product {
     name: string;
@@ -8,68 +8,84 @@ interface Product {
     quantity: number;
 }
 
-const useShoppingList = () => {
-    const [list, setList] = useState<Product[] | null>(null);
-    const url = buildDomain();
+const url = buildDomain();
 
-    if (!list) {
-        fetch(`${url}/shopping-list`)
-            .then((response) => response.json())
-            .then((data) => setList(data))
-    }
-
-    const openDialog = () => document.querySelector<HTMLDialogElement>('#add-product-dialog')?.showModal();
+const _handleOnSubmit = (target: EventTarget, productsAmmount: number, list: Product[] | null, setList: Dispatch<SetStateAction<Product[] | null>>) => {
     const closeDialog = () => document.querySelector<HTMLDialogElement>('#add-product-dialog')?.close();
-    const openAll = () => list?.map((item) => item.needsToBuy && document?.open(item.link, "_blank", "noopener,noreferrer"));
-    const setNewValue = (quantity: number) => String(quantity);
 
     const findObject = (target: EventTarget, param: string) => {
         return Object.values(target).find((field) => field.id === param)
             .value as string;
     };
 
-    const parseEvent = (target: EventTarget, productsAmmount: number) => {
+    const parseEvent = () => {
         const values = []
 
         for (let i = 0; i < productsAmmount; i++) {
             const name = findObject(target, `product-name-${i}`);
             const link = findObject(target, `product-link-${i}`);
-            values.push({ name, link });
+            const quantity = findObject(target, `product-quantity-${i}`);
+            values.push({ name, link, quantity: parseInt(quantity), needsToBuy: true });
         }
 
         return values;
     };
 
+    const products: Product[] = parseEvent();
+
+    const abort = new AbortController();
+
+    fetch(`${url}/shopping-list/new`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(products),
+        signal: abort.signal,
+    })
+        .then(() => {
+            // @ts-ignore reset does exist >:(
+            target.reset();
+            closeDialog();
+
+            const currentList = list || [];
+            const newList = [...currentList, ...products];
+            setList(newList);
+        })
+        .catch((e) => {
+            console.log("There has been an error", e);
+        });
+}
+
+const useShoppingList = () => {
+    const [list, setList] = useState<Product[] | null>(null);
+
+    if (!list) {
+        fetch(`${url}/shopping-list`)
+            .then((response) => response.json())
+            .then((data) => setList(data ?? []))
+    }
+
+    const openDialog = () => document.querySelector<HTMLDialogElement>('#add-product-dialog')?.showModal();
+    const buildUrl = (link: string, quantity: number) => `${link}&quantity=${quantity}`;
+    const openAll = () => list?.map((item) => item.needsToBuy && document?.open(buildUrl(item.link, item.quantity), "_blank", "noopener,noreferrer"));
+    const setNewValue = (quantity: number) => String(quantity);
+
     // Convert to action in services
     const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>, productsAmmount: number) => {
         e.preventDefault();
         e.stopPropagation();
-        const products = parseEvent(e.target, productsAmmount);
+        _handleOnSubmit(e.target, productsAmmount, list, setList);
 
-        const abort = new AbortController();
-        fetch(`${url}/shopping-list/new`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(products),
-            signal: abort.signal,
-        })
-            .then(() => {
-                // @ts-ignore reset does exist >:(
-                e.target.reset();
-                closeDialog();
-
-                const currentList = list || [];
-                const newList = [...currentList, ...products.map((product) => ({ ...product, needsToBuy: false, quantity: 0 }))];
-                setList(newList);
-            })
-            .catch((e) => {
-                console.log("There has been an error", e);
-            });
     };
 
     const handleCheckbox = (e: MouseEvent<HTMLInputElement>, index: number) => {
+        const rollback = () => {
+            const updatedList = [...list!];
+            updatedList[index].needsToBuy = !updatedList[index].needsToBuy;
+            setList(updatedList);
+        }
+
         if (e.currentTarget.type !== "checkbox") return
 
         if (!list) {
@@ -82,7 +98,7 @@ const useShoppingList = () => {
         updatedList[index].needsToBuy = checked;
 
         setList(updatedList);
-        sendNewData(index);
+        sendNewData(index, rollback);
     }
 
     const handleInputChange = (inputUser: string, index: number) => {
@@ -103,14 +119,14 @@ const useShoppingList = () => {
         setNewValue(updatedList[index].quantity);
     }
 
-    const sendNewData = (index: number) => {
+    const sendNewData = (index: number, rollback?: () => void) => {
         if (!list) {
             console.error("Como llegaste aqui?");
             return;
         }
 
         const abort = new AbortController();
-        const name = list[index].name;
+        const name = encodeURIComponent(list[index].name);
         const needsToBuy = list[index].needsToBuy;
         const quantity = list[index].quantity
 
@@ -125,10 +141,8 @@ const useShoppingList = () => {
             }),
             signal: abort.signal,
         })
-            .then(() => {
-                console.log("Updated successfully")
-            })
-            .catch(() => console.log("There has been an error"))
+            .catch(() => rollback && rollback())
+            .finally(() => abort.abort());
     }
 
     const handleDeleteItem = (index: number) => {
@@ -154,6 +168,26 @@ const useShoppingList = () => {
             .catch(() => console.log("There has been an error"))
     }
 
+    const handleCleanList = () => {
+        if (!list) {
+            console.error("Como llegaste aqui?");
+            return;
+        }
+
+        const abort = new AbortController();
+        fetch(`${url}/shopping-list`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            signal: abort.signal,
+        })
+            .then(() => {
+                const updatedList = list.map((item) => ({ ...item, needsToBuy: false, quantity: 0 }));
+                setList(updatedList);
+            })
+            .catch(() => console.log("There has been an error"))
+    }
     return {
         list,
         openDialog,
@@ -161,6 +195,7 @@ const useShoppingList = () => {
         handleCheckbox,
         handleInputChange,
         handleDeleteItem,
+        handleCleanList,
         openAll,
         setNewValue
     }

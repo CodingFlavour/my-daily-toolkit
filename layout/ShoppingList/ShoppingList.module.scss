@@ -1,30 +1,45 @@
 $tableColumns: 5;
 
 .shoppingList {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--color-border-active);
-    border-radius: 0.5rem;
+    // overflow: hidden;
 
-    li {
-        display: grid;
-        grid-template-columns: repeat($tableColumns, 1fr);
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        border-bottom: 1px solid var(--color-border-active);
-        padding: 0.5rem 0;
+    &__actions {
+        display: flex;
+        gap: 1rem;
+        padding: 1rem 0;
+    }
 
-        >* {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+    &__table {
+        position: relative;
+        height: calc(100vh - 10rem);
+        border: 1px solid var(--color-border-active);
+        border-radius: 0.5rem;
+        display: flex;
+        flex-direction: column;
+
+        &__list {
+            overflow-y: auto;
         }
 
-        &:last-child {
-            border-bottom: none;
-        }
+        li {
+            display: grid;
+            grid-template-columns: repeat($tableColumns, 1fr);
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid var(--color-border-active);
+            padding: 0.5rem 0;
 
+            >* {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
     }
 }
 

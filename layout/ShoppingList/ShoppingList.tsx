@@ -7,7 +7,7 @@ import useShoppingList from "./hooks/useShoppingList";
 import styles from './ShoppingList.module.scss';
 import IconClose from "@coding-flavour/icons/icon-close.svg";
 
-const { shoppingList, wrapper } = styles;
+const { shoppingList, shoppingList__actions, shoppingList__table, shoppingList__table__list, wrapper } = styles;
 
 const ShoppingList = () => {
     const {
@@ -17,22 +17,24 @@ const ShoppingList = () => {
         handleCheckbox,
         handleInputChange,
         handleDeleteItem,
+        handleCleanList,
         openAll,
         setNewValue
     } = useShoppingList();
 
     return (
-        <div>
+        <div className={shoppingList}>
             <Title title="Lista de la compra" />
-            <div className="actions">
+            <div className={shoppingList__actions}>
                 <Button text="Añadir producto" clickFn={openDialog} />
                 <Button text="Abrir todos" clickFn={openAll} />
+                <Button text="Limpiar lista" clickFn={handleCleanList} />
             </div>
             {(!list || list.length === 0) &&
                 <p>No hay productos en la lista de la compra</p>
             }
-            {list && list.length > 0 &&
-                <ul className={shoppingList}>
+            {list && list.length > 0 && (
+                <ul className={shoppingList__table}>
                     <li key="header">
                         <span>Nombre</span>
                         <span>Enlace</span>
@@ -40,35 +42,37 @@ const ShoppingList = () => {
                         <span>Cantidad</span>
                         <span>Eliminar</span>
                     </li>
-                    {list.map((item, index) => (
-                        <li key={index}>
-                            <span>{item.name}</span>
-                            <Link href={item.link} target="_blank" rel="noopener noreferrer">{item.link}</Link>
-                            <div className={wrapper}>
-                                <CheckboxText header="" name={`to-buy-${index}`} checked={item.needsToBuy} clickFn={(e) => handleCheckbox(e, index)} />
-                            </div>
-                            <div className={wrapper}>
-                                <InputText
-                                    id={`quantity-${index}`}
-                                    type="text"
-                                    text={"Cantidad"}
-                                    placeholder="1"
-                                    valueOnChange={(inputUser) => handleInputChange(inputUser, index)}
-                                    setNewValue={() => setNewValue(item.quantity)}
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <IconButton
-                                    src={IconClose}
-                                    alt="Eliminar producto"
-                                    onClick={() => handleDeleteItem(index)}
-                                />
-                            </div>
-                        </li>
-                    ))}
+                    <ul className={shoppingList__table__list}>
+                        {list.map((item, index) => (
+                            <li key={index}>
+                                <span>{item.name}</span>
+                                <Link href={item.link} target="_blank" rel="noopener noreferrer">{item.link}</Link>
+                                <div className={wrapper}>
+                                    <CheckboxText header="" name={`to-buy-${index}`} checked={item.needsToBuy} clickFn={(e) => handleCheckbox(e, index)} />
+                                </div>
+                                <div className={wrapper}>
+                                    <InputText
+                                        id={`quantity-${index}`}
+                                        type="text"
+                                        text={"Cantidad"}
+                                        placeholder="1"
+                                        valueOnChange={(inputUser) => handleInputChange(inputUser, index)}
+                                        setNewValue={() => setNewValue(item.quantity)}
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <IconButton
+                                        src={IconClose}
+                                        alt="Eliminar producto"
+                                        onClick={() => handleDeleteItem(index)}
+                                    />
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
                 </ul>
-            }
+            )}
             <NewItemDialog handleOnSubmit={handleOnSubmit} />
         </div>
     )
