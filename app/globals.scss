@@ -2,4 +2,7 @@
 
 .body {
     display: flex;
+    // Hack untill I remove main color from @coding-flavour/styles/grid-system
+    --color-background: var(--color-surface-background);
+    --main-background: var(--color-surface-background);
 }

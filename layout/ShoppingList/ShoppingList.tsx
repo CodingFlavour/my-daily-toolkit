@@ -19,7 +19,7 @@ const ShoppingList = () => {
         handleDeleteItem,
         handleCleanList,
         openAll,
-        setNewValue
+        setNewValueOnInput
     } = useShoppingList();
 
     return (
@@ -34,7 +34,7 @@ const ShoppingList = () => {
                 <p>No hay productos en la lista de la compra</p>
             }
             {list && list.length > 0 && (
-                <ul className={shoppingList__table}>
+                <ul className={shoppingList__table} data-testid="shopping-list">
                     <li key="header">
                         <span>Nombre</span>
                         <span>Enlace</span>
@@ -44,7 +44,7 @@ const ShoppingList = () => {
                     </li>
                     <ul className={shoppingList__table__list}>
                         {list.map((item, index) => (
-                            <li key={index}>
+                            <li key={index} data-testid="shopping-list-item">
                                 <span>{item.name}</span>
                                 <Link href={item.link} target="_blank" rel="noopener noreferrer">{item.link}</Link>
                                 <div className={wrapper}>
@@ -55,9 +55,9 @@ const ShoppingList = () => {
                                         id={`quantity-${index}`}
                                         type="text"
                                         text={"Cantidad"}
-                                        placeholder="1"
+                                        placeholder={item.quantity.toString()}
                                         valueOnChange={(inputUser) => handleInputChange(inputUser, index)}
-                                        setNewValue={() => setNewValue(item.quantity)}
+                                        setNewValue={() => setNewValueOnInput(item.quantity)}
                                         required
                                     />
                                 </div>

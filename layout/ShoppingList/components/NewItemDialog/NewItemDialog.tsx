@@ -17,16 +17,16 @@ const NewItemDialog = ({
     }
 
     return (
-        <dialog id="add-product-dialog" open={false}>
+        <dialog id="add-product-dialog" data-testid="add-product-dialog" >
             <div className={dialog}>
                 <form method="dialog" onSubmit={(e) => handleOnSubmit(e, counter)}>
                     <p>Añadir producto</p>
                     <ul className={dialog__list}>
                         {Array.from({ length: counter }, (_, index) => (
-                            <li key={index} className={dialog__list__item}>
-                                <InputText id={`product-name-${index}`} type="text" text={"Nombre"} withClear required />
-                                <InputText id={`product-link-${index}`} type="text" text={"Enlace"} withClear required />
-                                <InputText id={`product-quantity-${index}`} type="text" text={"Cantidad"} withClear required />
+                            <li key={index} className={dialog__list__item} data-testid={`product-${index}`}>
+                                <InputText id={`product-name-${index}`} type="text" text={"Nombre"} placeholder="Nombre del producto" withClear required />
+                                <InputText id={`product-link-${index}`} type="text" text={"Enlace"} placeholder="Enlace del producto" withClear required />
+                                <InputText id={`product-quantity-${index}`} type="text" text={"Cantidad"} placeholder="Cantidad" withClear required />
                             </li>
                         ))}
                     </ul>
