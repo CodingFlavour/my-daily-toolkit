@@ -1,0 +1,28 @@
+.pc * {
+  box-sizing: border-box;
+}
+
+.pc {
+  --bg-void: #15140f;
+  --bg-panel: #211f17;
+  --bg-panel-alt: #2a2719;
+  --grass: #79c05a;
+  --redstone: #b33b2e;
+  --gold: #e8c547;
+  --stone: #8b8b85;
+  --stone-dark: #45433a;
+  --text-primary: #ece6d6;
+  --text-muted: #a39c87;
+  --slot-bg: #3b3a32;
+  --slot-border-light: #58564a;
+  --slot-border-dark: #1c1b16;
+
+  background: var(--bg-void);
+  color: var(--text-primary);
+  font-family: 'VT323', monospace;
+  font-size: 19px;
+  padding: 28px 20px 60px;
+  min-height: 100%;
+  line-height: 1.35;
+  flex: 1;
+}
